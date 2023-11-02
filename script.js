@@ -21,7 +21,7 @@ const recipes = [
     source: "Jamie Oliver",
     totalTime: 130,
     url: "http://www.jamieoliver.com/recipes/vegetables-recipes/individual-vegetarian-lasagnes/",
-    image: "./recipe-images/individual-vegetarian-lasagnes.jpg",
+    image: "./images/individual-vegetarian-lasagnes.jpg",
   },
   {
     name: "Vegetarian Stir-Fried Garlic Scape",
@@ -44,7 +44,7 @@ const recipes = [
     source: "Red Cook",
     totalTime: null,
     URL: "http://redcook.net/2010/06/16/garlic-scape-an-off-menu-treat/",
-    image: "./recipe-images/vegetarian-stir-fried-garlic-s.jpg",
+    image: "./images/vegetarian-stir-fried-garlic-s.jpg",
   },
   {
     name: "Cheat’s cheesy focaccia",
@@ -58,7 +58,7 @@ const recipes = [
     source: "BBC Good Food",
     totalTime: 40,
     URL: "https://www.bbcgoodfood.com/recipes/cheats-cheesy-focaccia",
-    image: "./recipe-images/cheat’s-cheesy-focaccia.jpg",
+    image: "./images/cheat’s-cheesy-focaccia.jpg",
   },
   {
     name: "Vegetarian Shepherd's Pie",
@@ -83,7 +83,7 @@ const recipes = [
     source: "Martha Stewart",
     totalTime: 120,
     URL: "https://www.marthastewart.com/1535235/vegetarian-shepherds-pie",
-    image: "./recipe-images/vegetarian-shepherd's-pie.jpg",
+    image: "./images/vegetarian-shepherd's-pie.jpg",
   },
   {
     name: "Chicken Paprikash",
@@ -104,7 +104,7 @@ const recipes = [
     source: "No Recipes",
     totalTime: 80,
     URL: "http://norecipes.com/recipe/chicken-paprikash/",
-    image: "./recipe-images/chicken-paprikash.jpg",
+    image: "./images/chicken-paprikash.jpg",
   },
   {
     name: "Baked Chicken",
@@ -118,7 +118,7 @@ const recipes = [
     source: "Martha Stewart",
     totalTime: 90,
     url: "http://www.marthastewart.com/318981/baked-chicken",
-    image: "./recipe-images/baked-chicken.jpg",
+    image: "./images/baked-chicken.jpg",
   },
   {
     name: "Deep Fried Fish Bones",
@@ -127,7 +127,7 @@ const recipes = [
     source: "Serious Eats",
     totalTime: 31,
     url: "http://www.seriouseats.com/recipes/2011/03/deep-fried-fish-bones-recipe.html",
-    image: "./recipe-images/deep-fried-fish-bones.jpg",
+    image: "./images/deep-fried-fish-bones.jpg",
   },
   {
     name: "Burnt-Scallion Fish",
@@ -140,7 +140,7 @@ const recipes = [
     source: "Saveur",
     totalTime: 70,
     url: "http://www.saveur.com/article/Recipes/Burnt-Scallion-Fish",
-    image: "./recipe-images/fish-dish.jpg",
+    image: "./images/fish-dish.jpg",
   },
   {
     name: "Curry-Crusted Fish",
@@ -154,7 +154,7 @@ const recipes = [
     source: "BBC Good Food",
     totalTime: 80,
     url: "http://www.bbcgoodfood.com/recipes/4717/",
-    image: "./recipe-images/fish-dish.jpg",
+    image: "./images/fish-dish.jpg",
   },
   {
     name: "Meat Stock",
@@ -176,7 +176,7 @@ const recipes = [
     source: "Food52",
     totalTime: 60,
     url: "https://food52.com/recipes/3712-meat-stock",
-    image: "./recipe-images/meat.jpg",
+    image: "./images/meat.jpg",
   },
   {
     name: "Homemade Meat Broth",
@@ -194,10 +194,10 @@ const recipes = [
     source: "Cookstr",
     totalTime: 60,
     url: "http://www.cookstr.com/recipes/il-brodo-homemade-meat-broth",
-    image: "./recipe-images/meat.jpg",
+    image: "./images/meat.jpg",
   },
   {
-    name: "Spice-Rubbed Grilled Flap Meat (Sirloin Tip) Recipe",
+    name: "Spice-Rubbed Grilled Flap Meat (Sirloin Tip)",
     cuisineType: "south-american",
     ingredients: [
       "1 tablespoon whole black peppercorns, toasted",
@@ -214,6 +214,46 @@ const recipes = [
     source: "Serious Eats",
     totalTime: 240,
     url: "http://www.seriouseats.com/recipes/2012/05/spice-rubbed-grilled-flap-meat-sirloin-tip-recipe.html",
-    image: "./recipe-images/grilled.jpg",
+    image: "./images/grilled.jpg",
   },
 ];
+
+const container = document.querySelector(".container");
+const filterBtn = document.querySelector(".filterBtn");
+
+//filer and display recipe based on cusine type
+const loadRecipe = (recipes) => {
+  container.innerHTML = "";
+
+  recipes.forEach((recipe) => {
+    container.innerHTML += `
+    <div class="card p-4 border m-2">
+        <h2 class="font-bold ">${recipe.name}</h2>
+        <p class="text-red-300">${recipe.cuisineType}</p>
+        <p class="text-red-700">${recipe.totalTime}</p>
+       <img src="${recipe.image}" alt="${recipe.name}" class="w-full h-80">
+
+        <p>${recipe.ingredients}</p>
+         
+    </div>`;
+  });
+};
+
+//filter and display recipe based on cusine type
+const filterRecipes = () => {
+  const value = filterBtn.value;
+
+  if (value === "all") {
+    loadRecipe(recipes);
+  } else {
+    const filteredList = recipes.filter(
+      (recipe) => recipe.cuisineType === value
+    );
+    loadRecipe(filteredList);
+  }
+};
+
+//apply filter when user click on button
+filterBtn.addEventListener("click", filterRecipes);
+
+loadRecipe(recipes);
