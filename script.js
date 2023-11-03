@@ -218,11 +218,11 @@ const recipes = [
   },
 ];
 
-const container = document.querySelector(".container");
-const filterBtn = document.querySelector(".filterBtn");
+const container = document.querySelector("#container");
+const filterBtnDiv = document.getElementById("filterBtnDiv");
 
 //filer and display recipe based on cusine type
-const loadRecipe = (recipes) => {
+const loadRecipes = (recipes) => {
   container.innerHTML = "";
 
   recipes.forEach((recipe) => {
@@ -230,30 +230,34 @@ const loadRecipe = (recipes) => {
     <div class="card p-4 border m-2">
         <h2 class="font-bold ">${recipe.name}</h2>
         <p class="text-red-300">${recipe.cuisineType}</p>
-        <p class="text-red-700">${recipe.totalTime}</p>
+            <p class="text-red-700">${
+              recipe.totalTime ? recipe.totalTime : "<br>"
+            } </p>
        <img src="${recipe.image}" alt="${recipe.name}" class="w-full h-80">
-
-        <p>${recipe.ingredients}</p>
+<p>
+${recipe.ingredients}
+</p>
          
-    </div>`;
+    </div>
+    `;
   });
 };
 
 //filter and display recipe based on cusine type
 const filterRecipes = () => {
-  const value = filterBtn.value;
+  //selected value by btn choice
+  const value = button.value;
 
   if (value === "all") {
-    loadRecipe(recipes);
+    loadRecipes(recipes);
   } else {
     const filteredList = recipes.filter(
       (recipe) => recipe.cuisineType === value
     );
-    loadRecipe(filteredList);
+    loadRecipes(filteredList);
   }
 };
 
 //apply filter when user click on button
-filterBtn.addEventListener("click", filterRecipes);
-
-loadRecipe(recipes);
+filterBtnDiv.addEventListener("click", filterRecipes);
+loadRecipes(recipes);
