@@ -246,7 +246,7 @@ ${recipe.ingredients}
 //filter and display recipe based on cusine type
 const filterRecipes = () => {
   //selected value by btn choice
-  const value = button.value;
+  const value = filterBtnDiv.value;
 
   if (value === "all") {
     loadRecipes(recipes);
