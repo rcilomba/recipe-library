@@ -1,7 +1,7 @@
 const recipes = [
   {
     name: "Individual vegetarian lasagnes",
-    cuisineType: ["italian"],
+    cuisineType: "italian",
     ingredients: [
       "1.2 kg cherry tomatoes",
       "5 sprigs of fresh thyme",
@@ -25,7 +25,7 @@ const recipes = [
   },
   {
     name: "Vegetarian Stir-Fried Garlic Scape",
-    cuisineType: ["Balanced"],
+    cuisineType: "Balanced",
     ingredients: [
       "8 oz. garlic scapes",
       "3 oz. baby corn",
@@ -48,7 +48,7 @@ const recipes = [
   },
   {
     name: "Cheat’s cheesy focaccia",
-    cuisineType: ["Italian"],
+    cuisineType: "italian",
     ingredients: [
       "500g pack bread mix",
       "2 tbsp olive oil , plus a little extra for drizzling",
@@ -87,7 +87,7 @@ const recipes = [
   },
   {
     name: "Chicken Paprikash",
-    cuisineType: ["Low-Carb"],
+    cuisineType: "Low-Carb",
     ingredients: [
       "640 grams chicken - drumsticks and thighs ( 3 whole chicken legs cut apart)",
       "1/2 teaspoon salt",
@@ -108,7 +108,7 @@ const recipes = [
   },
   {
     name: "Baked Chicken",
-    cuisineType: ["american"],
+    cuisineType: "american",
     ingredients: [
       "6 bone-in chicken breast halves, or 6 chicken thighs and wings, skin-on",
       "1/2 teaspoon coarse salt",
@@ -122,7 +122,7 @@ const recipes = [
   },
   {
     name: "Deep Fried Fish Bones",
-    cuisineType: ["south east asian"],
+    cuisineType: "south east asian",
     ingredients: ["8 small whiting fish or smelt", "4 cups vegetable oil"],
     source: "Serious Eats",
     totalTime: 31,
@@ -131,7 +131,7 @@ const recipes = [
   },
   {
     name: "Burnt-Scallion Fish",
-    cuisineType: ["chinese"],
+    cuisineType: "asian",
     ingredients: [
       "2 bunches scallions",
       "8 tbsp. butter",
@@ -144,7 +144,7 @@ const recipes = [
   },
   {
     name: "Curry-Crusted Fish",
-    cuisineType: ["south east asian"],
+    cuisineType: "asian",
     ingredients: [
       "3 slices bread , about 85g/3oz in total",
       "1 lime",
@@ -244,10 +244,7 @@ ${recipe.ingredients}
 };
 
 //filter and display recipe based on cusine type
-const filterRecipes = () => {
-  //selected value by btn choice
-  const value = filterBtnDiv.value;
-
+const filterRecipes = (value) => {
   if (value === "all") {
     loadRecipes(recipes);
   } else {
@@ -258,6 +255,20 @@ const filterRecipes = () => {
   }
 };
 
-//apply filter when user click on button
-filterBtnDiv.addEventListener("click", filterRecipes);
+//apply filter when user clicks on button
+filterBtnDiv.addEventListener("click", (event) => {
+  if (event.target.tagName === "BUTTON") {
+    const value = event.target.value;
+    filterRecipes(value);
+  }
+});
+
 loadRecipes(recipes);
+
+//filter italian
+
+// const filterItalian = recipes.filter(
+//   (recipe) => recipe.cuisineType === "italian"
+// );
+
+// console.log(filterItalian);
