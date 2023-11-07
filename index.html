@@ -7,17 +7,40 @@
     <title>Recipes</title>
 </head>
 <body>
-    <div class="wrapper flex flex-col items-center justify-center">
-        <h1 class="text-3xl">Recipes</h1>
-       <div id="filterBtnDiv">
-  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4" value="all">All</button>
-  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4" value="italian">Italian</button>
-  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4" value="asian">Asian</button>
-  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4" value="american">American</button>
-  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4" value="other">Other</button>
+    <div class="wrapper flex flex-col items-center justify-center bg-sky-200">
+        <h1 class="text-3xl py-5">Recipes</h1>
+
+<div class="grid grid-cols-2 gap-3">
+
+    <div>
+        <h3>Country</h3>
+        <select id="filterDropdown">
+    <option value="all">ALL</option>
+    <option value="italian">Italian</option>
+    <option value="asian">Asian</option>
+    <option value="american">American</option>
+    <option value="other">Other</option>
+</select></div>
+    
+<div>
+    <h3>Time</h3>
+  <select id="filterDropdownTime">
+    <option value="all">ALL</option>
+    <option value="shortest">Shortest time</option>
+    <option value="longest">Longest time </option>
+   
+</select>  
 </div>
+
+</div>
+
+
+<section class="grid grid-cols-3 " id="container"></section>
+
+<section id="favorites">
+</section>
         
-        <section class="grid grid-cols-3" id="container"></section>
+       
 
        
 

@@ -198,7 +198,7 @@ const recipes = [
   },
   {
     name: "Spice-Rubbed Grilled Flap Meat (Sirloin Tip)",
-    cuisineType: "south-american",
+    cuisineType: "american",
     ingredients: [
       "1 tablespoon whole black peppercorns, toasted",
       "1 teaspoon coriander seed, toasted",
@@ -218,57 +218,78 @@ const recipes = [
   },
 ];
 
-const container = document.querySelector("#container");
-const filterBtnDiv = document.getElementById("filterBtnDiv");
+const container = document.getElementById("container");
+const favorites = document.getElementById("favorites");
+const filterDropdown = document.getElementById("filterDropdown");
+const filterDropdownTime = document.getElementById("filterDropdownTime");
 
-//filer and display recipe based on cusine type
-const loadRecipes = (recipes) => {
+//function to load and display the list of recipes
+const loadRecipes = (recipe) => {
   container.innerHTML = "";
 
-  recipes.forEach((recipe) => {
+  recipe.forEach((recipe) => {
+    const ingredientsList = recipe.ingredients
+      .map((ingredient) => `<li>${ingredient}</li>`)
+      .join("");
+
     container.innerHTML += `
-    <div class="card p-4 border m-2">
+    <div class="card p-4 border m-4 bg-white hover:bg-sky-100 rounded-lg">
         <h2 class="font-bold ">${recipe.name}</h2>
         <p class="text-red-300">${recipe.cuisineType}</p>
-            <p class="text-red-700">${
-              recipe.totalTime ? recipe.totalTime : "<br>"
-            } </p>
-       <img src="${recipe.image}" alt="${recipe.name}" class="w-full h-80">
-<p>
-${recipe.ingredients}
-</p>
-         
+        <p class="text-red-700">${
+          recipe.totalTime ? recipe.totalTime : "<br>"
+        }</p>
+        <img src="${recipe.image}" alt="${recipe.name}" class="w-full h-80">
+        <ul class="py-2">
+          ${ingredientsList}
+        </ul>
     </div>
     `;
   });
 };
+loadRecipes(recipes);
 
-//filter and display recipe based on cusine type
-const filterRecipes = (value) => {
+//function to filter and display recipe based on cusine type
+const filterRecipes = () => {
+  const value = filterDropdown.value;
+  console.log(value);
+
   if (value === "all") {
     loadRecipes(recipes);
   } else {
+    // Otherwise, filter recipe based on cuisine type  and load the filtered list.
     const filteredList = recipes.filter(
       (recipe) => recipe.cuisineType === value
     );
+
     loadRecipes(filteredList);
   }
 };
 
-//apply filter when user clicks on button
-filterBtnDiv.addEventListener("click", (event) => {
-  if (event.target.tagName === "BUTTON") {
-    const value = event.target.value;
-    filterRecipes(value);
-  }
-});
+filterRecipes();
 
+// Apply the filter when the user changes the dropdown selection.
+filterDropdown.addEventListener("change", filterRecipes);
+// Load the initial list of recipes when the page loads.
 loadRecipes(recipes);
 
-//filter italian
+//sort filter
 
-// const filterItalian = recipes.filter(
-//   (recipe) => recipe.cuisineType === "italian"
-// );
+const sortTime = () => {
+  const timeValue = filterDropdownTime.value;
+  console.log(timeValue);
 
-// console.log(filterItalian);
+  if (timeValue === "longest") {
+    recipes.sort((a, b) => b.totalTime - a.totalTime);
+    loadRecipes(recipes);
+  }
+
+  if (timeValue === "shortest") {
+    recipes.sort((a, b) => a.totalTime - b.totalTime);
+    loadRecipes(recipes);
+  }
+};
+sortTime();
+
+filterDropdownTime.addEventListener("change", sortTime);
+loadRecipes(recipes);
