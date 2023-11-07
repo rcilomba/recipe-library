@@ -198,7 +198,7 @@ const recipes = [
   },
   {
     name: "Spice-Rubbed Grilled Flap Meat (Sirloin Tip)",
-    cuisineType: "american",
+    cuisineType: "south-american",
     ingredients: [
       "1 tablespoon whole black peppercorns, toasted",
       "1 teaspoon coriander seed, toasted",
@@ -233,14 +233,16 @@ const loadRecipes = (recipe) => {
       .join("");
 
     container.innerHTML += `
-    <div class="card p-4 border m-4 bg-white hover:bg-sky-100 rounded-lg">
-        <h2 class="font-bold ">${recipe.name}</h2>
-        <p class="text-red-300">${recipe.cuisineType}</p>
-        <p class="text-red-700">${
+    <div class="card p-8 m-6 bg-white hover:bg-sky-100 rounded-3xl">
+        <h2 class="font-bold text-3xl ">${recipe.name}</h2>
+        <p class="text-red-300 text-xl">${recipe.cuisineType}</p>
+        <p class="text-red-700 text-xl pb-2">minutes: ${
           recipe.totalTime ? recipe.totalTime : "<br>"
         }</p>
-        <img src="${recipe.image}" alt="${recipe.name}" class="w-full h-80">
-        <ul class="py-2">
+        <img src="${recipe.image}" alt="${
+      recipe.name
+    }" class="w-full h-80 rounded-3xl">
+        <ul class="py-2 text-xl pt-6">
           ${ingredientsList}
         </ul>
     </div>
@@ -274,7 +276,6 @@ filterDropdown.addEventListener("change", filterRecipes);
 loadRecipes(recipes);
 
 //sort filter
-
 const sortTime = () => {
   const timeValue = filterDropdownTime.value;
   console.log(timeValue);
