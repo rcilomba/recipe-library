@@ -231,10 +231,11 @@ const loadRecipes = (recipe) => {
     const ingredientsList = recipe.ingredients
       .map((ingredient) => `<li>${ingredient}</li>`)
       .join("");
+    console.log(recipe.url);
 
     container.innerHTML += `
     <div class="card p-8 m-6 bg-white hover:bg-sky-100 rounded-3xl">
-        <h2 class="font-bold text-3xl ">${recipe.name}</h2>
+    <a href="${recipe.url}" class="font-bold text-3xl">${recipe.name}</a>
         <p class="text-red-300 text-xl">${recipe.cuisineType}</p>
         <p class="text-red-700 text-xl pb-2">minutes: ${
           recipe.totalTime ? recipe.totalTime : "<br>"
@@ -254,7 +255,6 @@ loadRecipes(recipes);
 //function to filter and display recipe based on cusine type
 const filterRecipes = () => {
   const value = filterDropdown.value;
-  console.log(value);
 
   if (value === "all") {
     loadRecipes(recipes);
@@ -278,8 +278,6 @@ loadRecipes(recipes);
 //sort filter
 const sortTime = () => {
   const timeValue = filterDropdownTime.value;
-  console.log(timeValue);
-
   if (timeValue === "longest") {
     recipes.sort((a, b) => b.totalTime - a.totalTime);
     loadRecipes(recipes);
